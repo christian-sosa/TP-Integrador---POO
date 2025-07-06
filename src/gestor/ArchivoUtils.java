@@ -1,3 +1,7 @@
+package gestor;
+
+import modelo.Evento;
+import modelo.Asistente;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
@@ -9,7 +13,6 @@ public class ArchivoUtils {
     private static final String ARCHIVO_EVENTOS = "eventos.txt";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-    // Guardar eventos en archivo
     public static void guardarEventos(List<Evento> eventos) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARCHIVO_EVENTOS))) {
             for (Evento evento : eventos) {
@@ -34,11 +37,10 @@ public class ArchivoUtils {
             System.out.println("Eventos guardados exitosamente en " + ARCHIVO_EVENTOS);
         } 
         catch (IOException e) {
-            System.err.println("Error al guardar eventos: " + e.getMessage());
+            System.out.println("No se pudo guardar el archivo");
         }
     }
 
-    // Cargar eventos desde archivo
     public static List<Evento> cargarEventos() {
         List<Evento> eventos = new ArrayList<>();
         File archivo = new File(ARCHIVO_EVENTOS);
@@ -83,18 +85,16 @@ public class ArchivoUtils {
             System.out.println("Eventos cargados exitosamente: " + eventos.size() + " eventos.");
         } 
         catch (IOException e) {
-            System.err.println("Error al cargar eventos: " + e.getMessage());
+            System.out.println("Error cargando archivo");
         }
         
         return eventos;
     }
 
-    // Verificar si existe el archivo de eventos
-    public static boolean existeArchivoEventos() {
+    public static boolean hayArchivo() {
         return new File(ARCHIVO_EVENTOS).exists();
     }
 
-    // Eliminar archivo de eventos
     public static boolean eliminarArchivoEventos() {
         File archivo = new File(ARCHIVO_EVENTOS);
         if (archivo.exists()) {
@@ -102,4 +102,4 @@ public class ArchivoUtils {
         }
         return false;
     }
-}
+} 
